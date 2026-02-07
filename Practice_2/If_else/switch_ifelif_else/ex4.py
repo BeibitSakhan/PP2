@@ -1,11 +1,9 @@
-point = (0, 5)
+number = 15
 
-match point:
-    case (0, 0):
-        print("At the origin")
-    case (0, y):
-        print(f"On the Y-axis at {y}")
-    case (x, 0):
-        print(f"On the X-axis at {x}")
+match number:
+    case n if n < 0:
+        print("Negative")
+    case n if n > 0:
+        print("Positive")
     case _:
-        print("Somewhere else")
+        print("Zero")
