@@ -1,0 +1,40 @@
+import re
+import json
+
+with open('raw.txt', 'r', encoding='utf-8') as file:
+    content = file.read()
+
+raw_prices = re.findall(r'\d[0-9 ]*,\d{2}', content)
+
+float_prices = []
+for p in raw_prices:
+    clean_p = p.replace(' ', '').replace(',', '.')
+    try:
+        float_prices.append(float(clean_p))
+    except ValueError:
+        continue
+
+product_names = re.findall(r'^\d+\.\n(.+)', content, re.MULTILINE)
+
+total_match = re.search(r'ИТОГО:\n([\d\s]+,\d{2})', content)
+if total_match:
+    total_val = float(total_match.group(1).replace(' ', '').replace(',', '.'))
+else:
+    total_val = max(float_prices) if float_prices else 0
+
+dt_match = re.search(r'(\d{2}\.\d{2}\.\d{4})\s+(\d{2}:\d{2}:\d{2})', content)
+
+payment = "Card" if "Банковская карта" in content else "Cash"
+
+receipt_data = {
+    "Store_Info": "EUROPHARMA Астана",
+    "Date": dt_match.group(1) if dt_match else "Not Found",
+    "Time": dt_match.group(2) if dt_match else "Not Found",
+    "Payment_Method": payment,
+    "Items": [name.strip() for name in product_names],
+    "Total_Amount": total_val,
+    "Price_List_Found": float_prices
+}
+
+print("--- RECEIPT ANALYSIS ---")
+print(json.dumps(receipt_data, indent=4, ensure_ascii=False))
