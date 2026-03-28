@@ -124,6 +124,13 @@ def menu():
         elif choice == "0":
             break
 
+
 if __name__ == "__main__":
+    conn = connect()
+    cur = conn.cursor()
+    cur.execute("SELECT current_database();")
+    print("Подключен к базе:", cur.fetchone())
+    cur.close()
+    conn.close()
     create_table()
     menu()
