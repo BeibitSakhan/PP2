@@ -31,7 +31,8 @@ def insert_csv():
     conn = connect()
     cur = conn.cursor()
     try:
-        with open("contacts.csv", "r", encoding="utf-8") as f:
+        soz = r"C:\Users\Beibit\Desktop\pp2\Practice_7\contacts.csv"
+        with open(soz, "r", encoding="utf-8") as f:
             reader = csv.reader(f)
             count = 0
             for row in reader:
@@ -42,8 +43,9 @@ def insert_csv():
         print(f"Добавлено {count} контактов из CSV!")
     except FileNotFoundError:
         print("Файл contacts.csv не найден!")
-    cur.close()
-    conn.close()
+    finally:
+        cur.close()
+        conn.close()
 
 def get_all():
     conn = connect()
@@ -105,15 +107,15 @@ def delete_contact():
 
 def menu():
     while True:
-        print("\n1. Add from console")
-        print("2. Add from CSV")
-        print("3. Show all")
-        print("4. Search")
-        print("5. Update")
-        print("6. Delete")
-        print("0. Exit")
+        print("\n1.Добавить в консоле")
+        print("2.Добавить с помощью CSV")
+        print("3.Показать все")
+        print("4.Найти")
+        print("5.Обновить")
+        print("6.Удалить")
+        print("Q.Выйти")
 
-        choice = input("Choose: ")
+        choice = input("Выбери пункт: ")
 
         if choice == "1":
             insert_console()
@@ -127,7 +129,7 @@ def menu():
             update_contact()
         elif choice == "6":
             delete_contact()
-        elif choice == "0":
+        elif choice == "Q":
             break
         else:
             print("Неверный выбор!")
@@ -136,7 +138,7 @@ if __name__ == "__main__":
     conn = connect()
     cur = conn.cursor()
     cur.execute("SELECT current_database();")
-    print("🔌 Подключен к базе:", cur.fetchone()[0])
+    print("Подключен к базе:", cur.fetchone()[0])
     cur.close()
     conn.close()
     create_table()
