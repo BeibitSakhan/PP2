@@ -1,34 +1,23 @@
-CREATE OR REPLACE FUNCTION search_contacts(p_pattern TEXT)
-RETURNS TABLE(
-    id    INTEGER,
-    name  VARCHAR,
-    phone VARCHAR
-) AS $$
+CREATE OR REPLACE FUNCTION get_contacts_by_pattern(p TEXT)
+RETURNS TABLE(name VARCHAR, phone VARCHAR) AS $$
 BEGIN
     RETURN QUERY
-        SELECT c.id, c.name, c.phone
-        FROM contacts c
-        WHERE c.name  ILIKE '%' || p_pattern || '%'
-           OR c.phone ILIKE '%' || p_pattern || '%'
-        ORDER BY c.name;
+    SELECT c.name::VARCHAR,
+            c.phone::VARCHAR
+    FROM contacts c
+    WHERE c.name ILIKE '%' || p || '%'
+       OR c.phone ILIKE '%' || p || '%';
 END;
-$$ language plpgsql;
+$$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION get_contacts(
-    p_limit INTEGER DEFAULT 10,
-    p_offset INTEGER DEFAULT 0
-)
-RETURNS TABLE(
-    id  INTEGER,
-    name VARCHAR,
-    phone VARCHAR
-) AS $$
+
+CREATE OR REPLACE FUNCTION get_contacts_paginated(p_limit INT, p_offset INT)
+RETURNS TABLE(name VARCHAR, phone VARCHAR) AS $$
 BEGIN
     RETURN QUERY
-        SELECT c.id, c.name, c.phone
-        FROM contacts c
-        ORDER BY c.id
-        LIMIT  p_limit
-        OFFSET p_offset;
+    SELECT c.name::VARCHAR,
+            c.phone::VARCHAR
+    FROM contacts c
+    LIMIT p_limit OFFSET p_offset;
 END;
-$$ language plpgsql;
+$$ LANGUAGE plpgsql;

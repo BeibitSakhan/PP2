@@ -1,7 +1,5 @@
-config = {
-    "host": "localhost",
-    "dbname": "postgres",
-    "user": "postgres",
-    "password": "SB1612007",
-    "port": 5432
-}
+DB_NAME = "postgres"
+DB_USER = "postgres"
+DB_HOST = "localhost"
+DB_PORT = "5432"
+DB_PASSWORD = "SB1612007"
