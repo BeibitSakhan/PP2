@@ -6,7 +6,7 @@ pygame.init()
 
 WIDTH, HEIGHT = 600, 400
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Moving Ball Game")
+pygame.display.set_caption("Moving Ball")
 clock = pygame.time.Clock()
 
 ball = Ball(WIDTH, HEIGHT)
@@ -27,7 +27,7 @@ while True:
             elif event.key == pygame.K_RIGHT:
                 ball.move(ball.speed, 0)
 
-    screen.fill((255, 255, 255))
+    screen.fill((255, 255, 123))
     ball.draw(screen)
     pygame.display.flip()
     clock.tick(60)

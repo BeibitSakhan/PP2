@@ -8,7 +8,6 @@ class MusicPlayer:
         self.current_index = 0
         self.is_playing = False
 
-        # Load all .mp3 and .wav files from the music folder
         if os.path.exists(music_folder):
             for f in sorted(os.listdir(music_folder)):
                 if f.endswith((".mp3", ".wav")):
