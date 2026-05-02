@@ -1,0 +1,45 @@
+[
+    {
+        "name": "Alice Johnson",
+        "email": "alice@gmail.com",
+        "birthday": "2004-05-12",
+        "group": "Friend",
+        "created_at": "2026-05-02 07:52:59.789964",
+        "phones": [
+            {
+                "phone": "87012222222",
+                "type": "home"
+            },
+            {
+                "phone": "87011111111",
+                "type": "mobile"
+            }
+        ]
+    },
+    {
+        "name": "Bob Smith",
+        "email": "bob@company.com",
+        "birthday": "2003-09-01",
+        "group": "Work",
+        "created_at": "2026-05-02 07:52:59.856339",
+        "phones": [
+            {
+                "phone": "87013333333",
+                "type": "work"
+            }
+        ]
+    },
+    {
+        "name": "Carol Brown",
+        "email": "carol@yahoo.com",
+        "birthday": "2004-12-25",
+        "group": "Family",
+        "created_at": "2026-05-02 07:52:59.925053",
+        "phones": [
+            {
+                "phone": "87014444444",
+                "type": "mobile"
+            }
+        ]
+    }
+]
